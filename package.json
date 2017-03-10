@@ -9,20 +9,28 @@
   "devDependencies": {
     "browserify": "^14.1.0",
     "budo": "^9.4.7",
+    "es2040": "^1.2.5",
     "flow-bin": "^0.41.0",
     "mkdirp": "^0.5.1",
+    "prettier": "^0.22.0",
+    "uglifyify": "^3.0.4",
     "unflowify": "^1.0.1"
   },
   "browserify": {
     "outfile": "dist/www/index.js",
     "transform": [
-      "unflowify"
+      "unflowify",
+      "es2040"
     ]
   },
   "scripts": {
     "postinstall": "mkdirp dist/www",
     "test": "flow",
     "start": "budo index.js --live",
-    "build": "browserify index.js --outfile dist/www/index.js"
+    "format": "prettier --write --single-quote --tab-width 4 --",
+    "build": "browserify index.js -g [ uglifyify ] --outfile dist/www/index.js"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1"
   }
 }
