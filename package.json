@@ -5,5 +5,20 @@
   "main": "index.js",
   "repository": "git@github.com:20kbudget/m1.git",
   "author": "Fabricio C Zuardi <fabricio@fabricio.org>",
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "browserify": "^14.1.0",
+    "budo": "^9.4.7",
+    "flow-bin": "^0.41.0",
+    "unflowify": "^1.0.1"
+  },
+  "browserify": {
+    "transform": [
+      "unflowify"
+    ]
+  },
+  "scripts": {
+    "test": "flow",
+    "start": "budo index.js:bundle.js --live"
+  }
 }
