@@ -31,6 +31,7 @@
     "build": "browserify index.js -g [ uglifyify ] --outfile dist/www/index.js"
   },
   "dependencies": {
-    "immutable": "^3.8.1"
+    "immutable": "^3.8.1",
+    "pixi.js": "^4.4.1"
   }
 }
