@@ -24,16 +24,19 @@ const playerCar = Map({
 });
 
 // Components
-const pauseClicked = ({bus, state}) => bus.emit('state:toggle', {flag: state.paused})
+const pauseClicked = ({ bus, state }) =>
+    bus.emit('state:toggle', { flag: state.paused });
 const pauseToggle = Map([
     textures(Set.of(pauseIcon, playIcon)),
     scale(0.5),
     position(),
     hitRect(),
-    input(Map({
-        tap: pauseClicked,
-        spacebar: pauseClicked
-    })),
+    input(
+        Map({
+            tap: pauseClicked,
+            spacebar: pauseClicked
+        })
+    )
 ]);
 
 const ui = Map({});
