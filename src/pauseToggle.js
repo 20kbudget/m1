@@ -1,30 +1,58 @@
 // @flow
+type Texture = {
+    id: string,
+    url: string,
+    size: number
+};
+type ToggleConstructorOptions = {
+    onIcon: Texture,
+    offIcon: Texture
+};
+type PauseToggle = (options: ToggleConstructorOptions) => Object;
 
-const { Map, Set } = require('immutable');
-
-const { pauseIcon, playIcon } = require('./textures');
+const { Map } = require('immutable');
 const {
-    textures,
+    sprites,
+    visibility,
     position,
-    scale,
-    hitRect,
-    input
+    replies,
+    // animations
 } = require('./features');
 
-const pauseClicked = ({ bus, state }) =>
-    bus.emit('state:toggle', { flag: state.paused });
-
-const pauseToggle = Map([
-    textures(Set.of(pauseIcon, playIcon)),
-    scale(0.5),
-    position(),
-    hitRect(),
-    input(
-        Map({
-            tap: pauseClicked,
-            spacebar: pauseClicked
+const pauseToggle:PauseToggle = ({ onIcon, offIcon }) =>
+    Map([
+        ['id', 'pauseToggle'],
+        ['value', false],
+        visibility(),
+        position(),
+        sprites([
+            { texture: onIcon, visibility: true },
+            { texture: offIcon, visibility: false }
+        ]),
+        replies({
+            match: msg => ['{id}:pointerdown', 'spacebar'].includes(msg),
+            reply: (msg, data) => '{id}:clicked'
         })
-    )
-]);
+        // animations({
+            // enter: ({ t, oldState, end }) =>
+                // end(oldState.merge({ visibility: true })),
+            // leave: ({ t, oldState, end }) =>
+                // end(oldState.merge({ visibility: false })),
+            // valueTrue: ({ t, oldState, end }) =>
+                // end(
+                    // oldState.merge({
+                        // iconsVisible: [false, true],
+                        // value: true
+                    // })
+                // ),
+            // valueFalse: ({ t, oldState, end }) =>
+                // end(
+                    // oldState.merge({
+                        // iconsVisible: [true, false],
+                        // value: false
+                    // })
+                // )
+        // })
+    ]);
 
 module.exports = pauseToggle;
