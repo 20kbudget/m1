@@ -24,7 +24,7 @@ const pauseToggleVisibles = ({ value = false, offIcon, onIcon }) =>
         Map([texture(onIcon), visibility(value)])
     ]);
 
-const pauseToggle: Toggle = options =>
+const PauseToggle: Toggle = options =>
     Map([
         id('pauseToggle'),
         position(),
@@ -39,4 +39,4 @@ const pauseToggle: Toggle = options =>
             ))
     ]);
 
-module.exports = pauseToggle;
+module.exports = PauseToggle;
