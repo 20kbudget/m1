@@ -1,7 +1,7 @@
 // @flow
 import type { Texture } from './features';
 type ToggleConstructorOptions = {
-    value: boolean,
+    value?: boolean,
     offIcon: Texture,
     onIcon: Texture
 };
