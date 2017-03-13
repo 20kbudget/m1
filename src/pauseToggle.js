@@ -10,7 +10,7 @@ type Toggle = (options: ToggleConstructorOptions) => Object;
 const { Map } = require('immutable');
 const {
     id,
-    sprites,
+    visibles,
     position,
     visibility,
     texture,
@@ -18,8 +18,8 @@ const {
     update
 } = require('./features');
 
-const pauseToggleSprites = ({ value = false, offIcon, onIcon }) =>
-    sprites([
+const pauseToggleVisibles = ({ value = false, offIcon, onIcon }) =>
+    visibles([
         Map([texture(offIcon), visibility(!value)]),
         Map([texture(onIcon), visibility(value)])
     ]);
@@ -28,14 +28,14 @@ const pauseToggle: Toggle = options =>
     Map([
         id('pauseToggle'),
         position(),
-        pauseToggleSprites(options),
+        pauseToggleVisibles(options),
         replies({
             match: msg => ['{id}:pointerdown', 'spacebar'].includes(msg),
             reply: (msg, data) => '{id}:clicked'
         }),
         update(({ position, value, oldSelf }) =>
             oldSelf.merge(
-                Map([position(position), pauseToggleSprites(options)])
+                Map([position(position), pauseToggleVisibles(options)])
             ))
     ]);
 

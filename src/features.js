@@ -21,7 +21,7 @@ const listProp = (name, defaultValue) =>
 const id = (value: string = uuid()) => ['id', value];
 const visibility = (value: boolean = false) => ['visibility', value];
 const position = listProp('position', [0, 0]);
-const sprites = listProp('sprites', []);
+const visibles = listProp('visibles', []);
 const texture = (t: Texture = {}) => ['texture', Map(t)];
 const replies = (
     mt: MessageThrough = {
@@ -35,7 +35,7 @@ module.exports = {
     id,
     visibility,
     position,
-    sprites,
+    visibles,
     texture,
     update,
     replies
