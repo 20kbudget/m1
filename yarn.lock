@@ -1900,6 +1900,10 @@ nan@^2.3.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
 
+nanobus@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-2.2.0.tgz#d5febe2b19711d838538773bc2e40780c2a911c5"
+
 node-pre-gyp@^0.6.29:
   version "0.6.33"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.33.tgz#640ac55198f6a925972e0c16c4ac26a034d5ecc9"
