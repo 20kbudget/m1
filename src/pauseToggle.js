@@ -1,5 +1,5 @@
 // @flow
-import type { Texture } from './features';
+import type { Texture } from './properties';
 type ToggleConstructorOptions = {
     value?: boolean,
     offIcon: Texture,
@@ -8,18 +8,19 @@ type ToggleConstructorOptions = {
 type Toggle = (options: ToggleConstructorOptions) => Object;
 
 const { Map } = require('immutable');
+const extend = require('xtend');
 const {
     id,
-    visibles,
+    images,
     position,
     visibility,
     texture,
     replies,
     update
-} = require('./features');
+} = require('./properties');
 
-const pauseToggleVisibles = ({ value = false, offIcon, onIcon }) =>
-    visibles([
+const pauseToggleImages = ({ value = false, offIcon, onIcon }) =>
+    images([
         Map([texture(offIcon), visibility(!value)]),
         Map([texture(onIcon), visibility(value)])
     ]);
@@ -27,15 +28,18 @@ const pauseToggleVisibles = ({ value = false, offIcon, onIcon }) =>
 const PauseToggle: Toggle = options =>
     Map([
         id('pauseToggle'),
-        position(),
-        pauseToggleVisibles(options),
+        position([300, 300]),
+        pauseToggleImages(options),
         replies({
             match: msg => ['{id}:pointerdown', 'spacebar'].includes(msg),
             reply: (msg, data) => '{id}:clicked'
         }),
         update(({ position, value, oldSelf }) =>
             oldSelf.merge(
-                Map([position(position), pauseToggleVisibles(options)])
+                Map([
+                    position(position),
+                    pauseToggleImages(extend(options, { value }))
+                ])
             ))
     ]);
 

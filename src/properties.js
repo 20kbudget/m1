@@ -6,23 +6,24 @@ type MessageThrough = {
     reply: ReplyFunction
 };
 export type Texture = {
-    id?: string,
-    url?: string,
-    size?: number
+    id: string,
+    url: string,
+    size: number
 };
 
 const { Set, List, Map } = require('immutable');
 const uuid = require('uuid/v4');
 
+const boolProp = (name, defaultValue) =>
+    (value: boolean = defaultValue) => [name, value];
 const listProp = (name, defaultValue) =>
     (value: Array<mixed> = defaultValue) => [name, List(value)];
 
-// Features (Components in the Entity-Components-System paradigm)
 const id = (value: string = uuid()) => ['id', value];
-const visibility = (value: boolean = false) => ['visibility', value];
+const visibility = boolProp('visibility', false);
 const position = listProp('position', [0, 0]);
-const visibles = listProp('visibles', []);
-const texture = (t: Texture = {}) => ['texture', Map(t)];
+const images = listProp('images', []);
+const texture = (t: Texture) => ['texture', Map(t)];
 const replies = (
     mt: MessageThrough = {
         match: (msg, data) => false,
@@ -35,7 +36,7 @@ module.exports = {
     id,
     visibility,
     position,
-    visibles,
+    images,
     texture,
     update,
     replies
