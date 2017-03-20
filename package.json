@@ -11,6 +11,7 @@
     "budo": "^9.4.7",
     "es2040": "^1.2.5",
     "flow-bin": "^0.41.0",
+    "lstatify": "^2.0.0",
     "mkdirp": "^0.5.1",
     "prettier": "^0.22.0",
     "uglifyify": "^3.0.4",
@@ -20,7 +21,8 @@
     "outfile": "dist/www/index.js",
     "transform": [
       "unflowify",
-      "es2040"
+      "es2040",
+      "lstatify"
     ]
   },
   "scripts": {
